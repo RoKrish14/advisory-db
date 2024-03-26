@@ -1,7 +1,12 @@
 name: TaaC-AI Workflow
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -25,5 +30,8 @@ jobs:
       run: |
         curl -o TaaC-AI.py https://raw.githubusercontent.com/yevh/TaaC-AI/main/TaaC-AI.py
 
-    - name: Run TaaC-AI script
-      run: python TaaC-AI.py
+    - name: Run TaaC-AI script with OrderService-example.yaml
+      run: python TaaC-AI.py OrderService-example.yaml
+
+    - name: Run TaaC-AI script with AuthService-example.yaml
+      run: python TaaC-AI.py AuthService-example.yaml
