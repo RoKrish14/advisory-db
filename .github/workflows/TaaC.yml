@@ -30,6 +30,14 @@ jobs:
       run: |
         curl -o TaaC-AI.py https://raw.githubusercontent.com/yevh/TaaC-AI/main/TaaC-AI.py
 
+    - name: Download OrderService-example.yaml
+      run: |
+        curl -o OrderService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/OrderService-example.yaml
+
+    - name: Download AuthService-example.yaml
+      run: |
+        curl -o OrderService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/AuthService-example.yaml
+
     - name: Run TaaC-AI script with OrderService-example.yaml
       run: python TaaC-AI.py OrderService-example.yaml
 
