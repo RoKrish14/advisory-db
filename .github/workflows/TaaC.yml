@@ -36,6 +36,10 @@ jobs:
     - name: Download OrderService-example.yaml
       run: |
         curl -o OrderService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/OrderService-example.yaml
+    
+    - name: Download AuthService-example.yaml
+      run: |
+        curl -o AuthService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/AuthService-example.yaml
 
     - name: Download TaaC-AI script
       run: |
@@ -43,3 +47,16 @@ jobs:
 
     - name: Run TaaC-AI script with OrderService-example.yaml
       run: python TaaC-AI.py OrderService-example.yaml
+      
+    - name: Run TaaC-AI script with AuthService-example.yaml
+      run: python TaaC-AI.py AuthService-example.yaml
+
+    - name: Execute TaaC-AI script with GPT-4
+      run: python TaaC-AI.py --model gpt-4 OrderService-example.yaml
+
+    - name: Execute TaaC-AI script with GPT-4
+      run: python TaaC-AI.py --model gpt-4 AuthService-example.yaml
+
+    - name: Open generated .html report
+      run: echo "Report generated, open it for review"
+    
