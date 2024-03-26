@@ -21,5 +21,9 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r https://raw.githubusercontent.com/yevh/TaaC-AI/main/requirements.txt
 
+    - name: Download TaaC-AI script
+      run: |
+        curl -o TaaC-AI.py https://raw.githubusercontent.com/yevh/TaaC-AI/main/TaaC-AI.py
+
     - name: Run TaaC-AI script
-      run: python https://github.com/yevh/TaaC-AI/blob/main/TaaC-AI.py
+      run: python TaaC-AI.py
