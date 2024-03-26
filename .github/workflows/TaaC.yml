@@ -22,4 +22,4 @@ jobs:
         pip install -r https://raw.githubusercontent.com/yevh/TaaC-AI/main/requirements.txt
 
     - name: Run TaaC-AI script
-      run: python TaaC-AI.py
+      run: python https://github.com/yevh/TaaC-AI/blob/main/TaaC-AI.py
