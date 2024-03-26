@@ -19,6 +19,8 @@ jobs:
         override: true
 
     - name: Install MIRAI
+      env:
+        LD_LIBRARY_PATH: /home/runner/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib:$LD_LIBRARY_PATH
       run: |
         git clone https://github.com/facebookexperimental/MIRAI.git
         cd MIRAI
