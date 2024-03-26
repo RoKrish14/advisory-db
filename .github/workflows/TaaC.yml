@@ -12,6 +12,9 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -26,20 +29,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r https://raw.githubusercontent.com/yevh/TaaC-AI/main/requirements.txt
 
-    - name: Download TaaC-AI script
-      run: |
-        curl -o TaaC-AI.py https://raw.githubusercontent.com/yevh/TaaC-AI/main/TaaC-AI.py
-
     - name: Download OrderService-example.yaml
       run: |
         curl -o OrderService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/OrderService-example.yaml
 
-    - name: Download AuthService-example.yaml
+    - name: Download TaaC-AI script
       run: |
-        curl -o OrderService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/AuthService-example.yaml
+        curl -o TaaC-AI.py https://raw.githubusercontent.com/yevh/TaaC-AI/main/TaaC-AI.py
 
     - name: Run TaaC-AI script with OrderService-example.yaml
       run: python TaaC-AI.py OrderService-example.yaml
-
-    - name: Run TaaC-AI script with AuthService-example.yaml
-      run: python TaaC-AI.py AuthService-example.yaml
