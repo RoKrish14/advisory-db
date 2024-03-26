@@ -54,6 +54,9 @@ jobs:
     - name: Execute TaaC-AI script with GPT-4
       run: python TaaC-AI.py OrderService-example.yaml
 
-    - name: Save report to workflows directory
-      run: mv report.html .github/workflows/ThreatModelingReport.html
+    - name: Upload report as artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: ThreatModelingReport
+        path: .github/workflows/ThreatModelingReport.html
     
