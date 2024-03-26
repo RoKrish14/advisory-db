@@ -29,6 +29,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r https://raw.githubusercontent.com/yevh/TaaC-AI/main/requirements.txt
 
+    - name: Download template.html
+      run: |
+        curl -o template.html https://raw.githubusercontent.com/yevh/TaaC-AI/main/template.html
+
     - name: Download OrderService-example.yaml
       run: |
         curl -o OrderService-example.yaml https://raw.githubusercontent.com/yevh/TaaC-AI/main/OrderService-example.yaml
