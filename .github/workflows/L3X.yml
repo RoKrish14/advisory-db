@@ -1,0 +1,33 @@
+name: L3X AI-driven Static Analyzer
+
+on:
+  workflow_dispatch:
+
+jobs:
+  l3x_analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create output directory
+        run: mkdir -p ${{ github.workspace }}/workflows/output
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run L3X Static Analysis
+        run: |
+          python l3x.py --target . --output ${{ github.workspace }}/workflows/output
+
+      - name: Upload SARIF
+        uses: security/sast/upload-sarif@v1
+        with:
+          sarif_file: ${{ github.workspace }}/workflows/output/l3x-results.sarif
