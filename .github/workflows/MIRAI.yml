@@ -20,11 +20,11 @@ jobs:
 
     - name: Install MIRAI
       run: |
-        git clone --branch v1.1.8 --depth 1 https://github.com/facebookexperimental/MIRAI
+        git clone https://github.com/facebookexperimental/MIRAI.git
         cd MIRAI
-        cargo install --path .
+        cargo install --locked --path ./checker
         echo "Installed MIRAI version:"
-        cargo mirai --version
+        ./target/release/mirai --version
 
     - name: Run MIRAI
       run: |
