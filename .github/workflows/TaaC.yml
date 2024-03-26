@@ -52,11 +52,8 @@ jobs:
       run: python TaaC-AI.py AuthService-example.yaml
 
     - name: Execute TaaC-AI script with GPT-4
-      run: python TaaC-AI.py --model gpt-4 OrderService-example.yaml
+      run: python TaaC-AI.py OrderService-example.yaml
 
-    - name: Execute TaaC-AI script with GPT-4
-      run: python TaaC-AI.py --model gpt-4 AuthService-example.yaml
-
-    - name: Open generated .html report
-      run: echo "Report generated, open it for review"
+    - name: Save report to workflows directory
+      run: mv report.html .github/workflows/ThreatModelingReport.html
     
