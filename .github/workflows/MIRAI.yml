@@ -1,0 +1,36 @@
+name: MIRAI Analysis
+
+on:
+  workflow_dispatch:
+
+jobs:
+  mirai:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 0 # Necessary for complete history
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+
+    - name: Install MIRAI
+      run: |
+        cargo install --git https://github.com/facebookexperimental/MIRAI --tag v1.1.8
+        echo "Installed MIRAI version:"
+        cargo mirai --version
+
+    - name: Run MIRAI
+      run: |
+        RUSTFLAGS="-Z always_encode_mir" cargo mirai
+        echo "MIRAI analysis complete."
+
+    - name: Check MIRAI Output
+      run: |
+        # Add a step to check MIRAI's output, potentially failing the job if issues are detected.
+        # This step is highly customizable depending on how you want to handle MIRAI's findings.
+        echo "Check your MIRAI output for any action items."
