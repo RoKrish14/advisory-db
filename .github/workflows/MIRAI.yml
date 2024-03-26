@@ -20,7 +20,7 @@ jobs:
 
     - name: Install MIRAI
       run: |
-        cargo install --git https://github.com/facebookexperimental/MIRAI --tag v1.1.8
+        cargo install --git https://github.com/facebookexperimental/MIRAI --tag v1.1.1 --package mirai
         echo "Installed MIRAI version:"
         cargo mirai --version
 
