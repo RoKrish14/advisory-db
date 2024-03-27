@@ -26,6 +26,7 @@ jobs:
       env:  # Update path if necessary (see troubleshooting)
         LD_LIBRARY_PATH: /home/runner/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib:$LD_LIBRARY_PATH
       run: |
+        rm -rf MIRAI
         git clone https://github.com/facebookexperimental/MIRAI.git
         cd MIRAI
         cargo install --locked --path ./checker
