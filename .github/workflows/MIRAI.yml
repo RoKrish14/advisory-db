@@ -1,7 +1,6 @@
 name: MIRAI Analysis
 
-on:
-  workflow_dispatch:
+on:  workflow_dispatch
 
 jobs:
   mirai:
@@ -10,33 +9,60 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        fetch-depth: 0 # Necessary for complete history
+        fetch-depth: 0
 
-    - name: Install Rust
+    # Verify Nightly Toolchain (Optional)
+    - name: Verify Nightly Toolchain
+      run: |
+        rustup show
+
+    - name: Install Nightly Rust
       uses: actions-rs/toolchain@v1
       with:
         toolchain: nightly
         override: true
 
     - name: Install MIRAI
-      env:
-        LD_LIBRARY_PATH: /home/runner/.rustup/toolchains/stable-x86_64-unknown-linux-gnu/lib:$LD_LIBRARY_PATH
+      env:  # Update path if necessary (see troubleshooting)
+        LD_LIBRARY_PATH: /home/runner/.rustup/toolchains/nightly-x86_64-unknown-linux-gnu/lib:$LD_LIBRARY_PATH
       run: |
         git clone https://github.com/facebookexperimental/MIRAI.git
         cd MIRAI
         cargo install --locked --path ./checker
         echo "Installed MIRAI version:"
         ./target/release/mirai --version
-    
-    - name: Run MIRAI
+
+    - name: Run MIRAI (Attempt 1)
       run: |
         RUSTFLAGS="-Z always_encode_mir" cargo mirai
-        echo "MIRAI analysis complete."
+        echo "MIRAI analysis complete (attempt 1)."
 
-    - name: Run MIRAI
+    # Alternative Library Loading (Optional)
+    - name: Locate Missing Library (Optional)
+      run: |
+        locate librustc_driver-8e42d501a7efdfb9.so  # Update library name if necessary
+
+    - name: Run MIRAI (Attempt 2 - Optional)
+      # Update PATH_TO_SHARED_LIBRARY_DIRECTORY with the actual path from previous step
       run: |
         /lib/ld-linux.so.2 --library-path PATH_TO_SHARED_LIBRARY_DIRECTORY ./MIRAI/target/release/mirai
-        echo "MIRAI analysis complete."
+        echo "MIRAI analysis complete (attempt 2)."
+
+    # Alternative Library Loading (attempt 3 - Optional)
+    - name: Install MIRAI with adjusted LD_LIBRARY_PATH (Optional)
+      env:
+        LD_LIBRARY_PATH: /path/to/library_dir:$LD_LIBRARY_PATH  # Update path if necessary
+      run: |
+        git clone https://github.com/facebookexperimental/MIRAI.git
+        cd MIRAI
+        cargo install --locked --path ./checker
+        echo "Installed MIRAI version:"
+        ./target/release/mirai --version
+
+    - name: Run MIRAI (Attempt 3 - Optional)
+      run: |
+        RUSTFLAGS="-Z always_encode_mir" cargo mirai
+        echo "MIRAI analysis complete (attempt 3)."
 
     - name: Check MIRAI Output
       run: |
