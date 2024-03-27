@@ -11,7 +11,13 @@ jobs:
     - uses: actions/checkout@v2
       with:
         fetch-depth: 0 # Necessary for complete history
-
+        
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        override: true
+        
     - name: Install MIRAI
       run: |
         git clone https://github.com/facebookexperimental/MIRAI.git
