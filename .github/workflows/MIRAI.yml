@@ -21,6 +21,10 @@ jobs:
       with:
         toolchain: nightly
         override: true
+    - name: Locate Missing Library
+      run: |
+        locate librustc_driver-8e42d501a7efdfb9.so  # Update library name if necessary
+      shell: bash  # Optional, specifies shell to use for locate command
 
     - name: Install MIRAI
       env:  # Update path if necessary (see troubleshooting)
