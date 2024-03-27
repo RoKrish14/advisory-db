@@ -24,7 +24,7 @@ jobs:
         
     - name: Locate Missing Library
       run: |
-        sudo find / -name "librustc_driver-8e42d501a7efdfb9.so" 2>/dev/null
+        sudo find / -name "librustc_*.so" 2>/dev/null
       shell: bash
 
     - name: Install MIRAI
