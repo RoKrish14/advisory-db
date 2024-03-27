@@ -17,6 +17,11 @@ jobs:
       with:
         toolchain: nightly
         override: true
+
+    - name: Install Rust Components
+      run: |
+        rustup component add rust-src rustc-dev llvm-tools-preview
+        echo "Installed Rust components."
         
     - name: Install MIRAI
       run: |
