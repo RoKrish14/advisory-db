@@ -15,7 +15,7 @@ jobs:
     - name: Install Rust
       uses: actions-rs/toolchain@v1
       with:
-        toolchain: stable
+        toolchain: nightly
         override: true
 
     - name: Install MIRAI
@@ -27,6 +27,11 @@ jobs:
         cargo install --locked --path ./checker
         echo "Installed MIRAI version:"
         ./target/release/mirai --version
+    
+    - name: Run MIRAI
+      run: |
+        RUSTFLAGS="-Z always_encode_mir" cargo mirai
+        echo "MIRAI analysis complete."
 
     - name: Run MIRAI
       run: |
