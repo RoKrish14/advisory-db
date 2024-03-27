@@ -30,7 +30,7 @@ jobs:
 
     - name: Run MIRAI
       run: |
-        RUSTFLAGS="-Z always_encode_mir" cargo mirai
+        /lib/ld-linux.so.2 --library-path PATH_TO_SHARED_LIBRARY_DIRECTORY ./MIRAI/target/release/mirai
         echo "MIRAI analysis complete."
 
     - name: Check MIRAI Output
